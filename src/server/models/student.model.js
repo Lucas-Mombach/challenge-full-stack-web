@@ -27,6 +27,15 @@ class StudentModel {
       throw new Error(`Error creating student: ${err.message}`);
     }
   }
+  
+  static async updateStudent(ra, student) {
+    try {
+      await connection.promise().query('UPDATE STUDENT SET ? WHERE RA = ?', [student, ra]);
+      return student;
+    } catch (err) {
+      throw new Error(`Error updating student: ${err.message}`);
+    }
+  }
 
 }
 export default StudentModel;
