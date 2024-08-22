@@ -30,5 +30,15 @@ class studentController{
       res.status(500).send(err.message);
     }
   }
+  async updateStudent(req, res) {
+    const ra = req.params.RA;
+    const updatedStudent = req.body;
+    try {
+      const student = await StudentModel.updateStudent(ra, updatedStudent);
+      res.json(student);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  }
 };  
 export default new studentController();
