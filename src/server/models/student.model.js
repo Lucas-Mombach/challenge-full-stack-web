@@ -9,7 +9,7 @@ class StudentModel {
       throw new Error(`Error fetching all students: ${err.message}`);
     }
   }
-  
+
   static async getStudentByRA(ra) {
     try {
       const [results] = await connection.promise().query('SELECT * FROM STUDENT WHERE RA = ?', [ra]);
@@ -18,5 +18,15 @@ class StudentModel {
       throw new Error(`Error fetching student by RA: ${err.message}`);
     }
   }
+
+  static async createStudent(student) {
+    try {
+      await connection.promise().query('INSERT INTO STUDENT SET ?', student);
+      return student; 
+    } catch (err) {
+      throw new Error(`Error creating student: ${err.message}`);
+    }
+  }
+
 }
 export default StudentModel;
