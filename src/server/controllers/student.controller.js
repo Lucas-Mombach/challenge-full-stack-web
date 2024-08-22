@@ -9,5 +9,16 @@ class studentController{
       res.status(500).send(err.message);
     }
   }
+  
+  async getStudentByRA(req, res) {
+    const ra = req.params.RA;
+    try {
+      console.log("Called student with ra: ",ra);
+      const student = await StudentModel.getStudentByRA(ra);
+      res.json(student);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  }
 };  
 export default new studentController();
