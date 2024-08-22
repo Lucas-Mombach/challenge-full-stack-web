@@ -27,13 +27,22 @@ class StudentModel {
       throw new Error(`Error creating student: ${err.message}`);
     }
   }
-  
+
   static async updateStudent(ra, student) {
     try {
       await connection.promise().query('UPDATE STUDENT SET ? WHERE RA = ?', [student, ra]);
       return student;
     } catch (err) {
       throw new Error(`Error updating student: ${err.message}`);
+    }
+  }
+  
+  static async deleteStudent(ra) {
+    try {
+      await connection.promise().query('DELETE FROM STUDENT WHERE RA = ?', [ra]);
+      return { message: 'Student deleted' };
+    } catch (err) {
+      throw new Error(`Error deleting student: ${err.message}`);
     }
   }
 
