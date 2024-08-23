@@ -69,5 +69,36 @@
 </template>
 
 <script>
+import axios from "axios";
 
+export default {
+  data() {
+    return {
+      valid: true,
+      form: {
+        name: "",
+        email: "",
+        ra: "",
+        cpf: "",
+      },
+    };
+  },
+  methods: {
+    async submitForm() {
+      try {
+        console.log(this.form); // Check the content before sending
+        const response = await axios.post("http://localhost:4600/api/v1/", this.form);
+        console.log("Form submitted successfully:", response.data);
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        if (error.response) {
+          console.error("Response data:", error.response.data);
+          console.error("Response status:", error.response.status);
+          console.error("Response headers:", error.response.headers);
+        }
+      }
+    },
+
+  },
+};
 </script>
