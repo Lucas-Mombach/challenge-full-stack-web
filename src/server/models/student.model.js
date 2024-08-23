@@ -30,6 +30,9 @@ class StudentModel {
 
   static async updateStudent(ra, student) {
     try {
+      if (ra != student.ra) {
+        throw new Error('RA in the URL does not match RA in the student object');
+      }  
       await connection.promise().query('UPDATE STUDENT SET ? WHERE RA = ?', [student, ra]);
       return student;
     } catch (err) {
